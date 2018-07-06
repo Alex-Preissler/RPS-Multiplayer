@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang='en-us'>
+    <head>
+        <title> </title>
+        <meta charset='UTF-8'>
+        <link rel='stylesheet' href='assets/css/reset.css'>
+        <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css'>
+        <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'>
+        <script src='http://code.jquery.com/jquery-3.3.1.slim.min.js' integrity='sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E=' crossorigin='anonymous'></script>
+        <script src='https://www.gstatic.com/firebasejs/5.2.0/firebase.js'></script>
+        <script src='https://rawgit.com/moment/moment/2.2.1/min/moment.min.js'></script>
+        <link rel='stylesheet' type='text/css' href='assets/css/style.css'>
+    </head>
+    <body>
+        <div class='container'>
+            <div class='row'>
+                <div class='col'>
+                    <h1>Rock Paper Scissors</h1>
+                    
+                    <div id='player-assign'></div>
+                    <div id='player-greetig'></div>
+                    <br>
+                    <div id='game-control'></div>
+  
+                </div>
+            </div>
+            <div class='row'>
+                <div class='col-md-4 col-lg-4 col-xl-4'>
+
+                    <div class='game-box' id='player1'>
+                        <div class='text' id='p1-name'></div>
+                        <div class='text' id='p1-choices'></div>
+                        <div class='text' id='p1-score'></div>
+                    </div>
+
+                </div>
+                <div class='col-md-4 col-lg-4 col-xl-4'>
+
+                    <div class='game-box' id='game-info'>
+
+                        <div class="text" id="game-box-text"></div>
+
+                    </div>
+
+                </div>
+                <div class='col-md-4 col-lg-4 col-xl-4'>
+
+                    <div class='game-box' id='player2'>
+                        <div class='text' id='p2-name'></div>
+                        <div class='text' id='p2-choices'></div>
+                        <div class='text' id='p2-score'></div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class='row'>
+                <div class='col-md-12 col-lg-12 col-xl-12' id='chat-col'>
+                    <div id='chat-box'></div>
+                        <form role='form'>
+                            <label for="chat-input"></label>
+                            <input type='text' id='chat-input' placeholder='type to chat'>
+                            <button class='btn btn-primary btn-sm' id='chat-submit'>Send</button> 
+                        </form>
+                    </div>
+                </div>
+            </div>
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+        </div>
+ 
+ 
+        <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+        <script src='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js'></script>
+        <script src='assets/javascript/script.js'></script>
+    </body>
+</html>

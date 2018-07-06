@@ -1,0 +1,122 @@
+body {
+
+    background-color: lightgray;
+
+}
+
+h1 {
+
+    background-color: blanchedalmond;
+    text-align: center;
+    padding: 15px 0;
+
+}
+
+#player-assign {
+    margin-top: 25px; 
+    text-align: center;
+
+}
+#name-input {
+
+    padding: 0; 
+    width: 25%;
+    height: 50px;
+    font-size: 32px;   
+    vertical-align: middle;
+}
+
+#name-submit {
+
+   vertical-align: middle;
+   height: 50px;
+   width: 75px;
+}
+
+.game-box {
+
+    width: 100%;
+    padding-top: 100%;
+    border: solid black 2px;
+    position: relative;
+
+}
+
+.text {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+
+#chat-box {
+
+    width: 75%;
+    margin: 0 auto;
+    padding-top: 25%;
+    border: solid black 1px; 
+    position: relative;
+    background-color: white;
+
+}
+
+#chat-col {
+    padding-top: 25px; 
+    text-align: center;
+
+}
+
+form {
+
+    margin-top: 5px;
+
+}
+
+#chat-input {
+
+    padding-left: 2px; 
+    width: 70%;
+    vertical-align: middle;
+}
+
+#chat-submit {
+
+   vertical-align: middle;
+}
+
+#p1-name {
+
+    text-align: center;
+
+}
+
+#choices-div {
+
+    width: 100%;
+    text-align: center;
+
+}
+
+.choice-button {
+
+    display: block;
+    z-index: 2;
+    text-align: center;
+    margin: 2px auto;
+
+}
+
+#p1-choices {
+
+    width: 100%;
+    top: 25%;
+
+}
+
+#p1-score {
+
+    text-align: center;
+    top: 92%;
+
+}
