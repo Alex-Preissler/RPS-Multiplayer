@@ -13,8 +13,8 @@ var config = {
   var player1 = false;
   var player2 = false;
   var spectator = false;
-  var player1Ref = database.ref('/player1/name');
-  var player2Ref = database.ref('/player2/name');
+  var player1Ref = database.ref('/users/player1/name');
+  var player2Ref = database.ref('/users/player2/name');
   var queue;
   var wins = 0;
   var losses = 0;
@@ -56,13 +56,13 @@ $(document).on("click","#name-submit", function(event) {
 
 
 
-        if(snapshot.val().player1.name == false){
+        if(snapshot.val().users.player1.name == false){
 
             player1 = true;
 
             player1Constructor(name);
 
-            $("#name-form").remove();
+            $("#name-form").remove(); 
 
             playerGreeting.text("Hello " + name + ", you are Player 1!");
             playerPosition.text("Position: " + queue);
@@ -73,7 +73,7 @@ $(document).on("click","#name-submit", function(event) {
             $("#p1-score").text("Wins: " + wins + "  Losses: " + losses);
      
            
-        }else if(snapshot.val().player2.name == false) {
+        }else if(snapshot.val().users.player2.name == false) {
 
             player2 = true;
 
@@ -128,7 +128,7 @@ function player1Constructor(name) {
         choice: false
     }
 
-    database.ref('/player1').set(addPlayer);
+    database.ref('/users/player1').set(addPlayer);
     player1Ref.onDisconnect().set(false);
 
 
@@ -144,7 +144,7 @@ function player2Constructor(name) {
         choice: false
     }
 
-    database.ref('/player2').set(addPlayer);
+    database.ref('/users/player2').set(addPlayer);
     player2Ref.onDisconnect().set(false);
     console.log(player2);
   
@@ -165,14 +165,14 @@ function userQueueConstructor(name) {
     
 }
 
-database.ref().on("value", function(snapshot) {
+database.ref('/users').on("value", function(snapshot) {
 
     if(snapshot.val().player1.name != false && snapshot.val().player2.name != false){
 
         gameControl(snapshot);
 
     
-    }else if(snapshot.val().player1 == false || snapshot.val().player2 == false) {
+    }else if(snapshot.val().player1.name == false || snapshot.val().player2.name == false) {
 
         if(snapshot.val().userQueue != null){
             
@@ -235,7 +235,7 @@ function gameControl(snapshot) {
         if(player2 == true){
 
             $("#game-control").text("It's Your Trun!");
-            $("#p1-choices").append(choices);
+            $("#p2-choices").append(choices);
 
 
         }else{
@@ -266,11 +266,11 @@ $( document ).on("click", ".choice-button", function() {
     if(turn == "p1") {
 
         var choice = $(this).val();
-        database.ref('/player1/choice').set(choice);
+        database.ref('/users/player1/choice').set(choice);
 
         if(player2 != true) {
 
-            $("p1-choices").text(choice);
+            $("#p1-choices").text(choice);
 
         }else{
 
@@ -279,12 +279,12 @@ $( document ).on("click", ".choice-button", function() {
 
     }else{
 
-        var choice = this.val();
-        database.ref('/player2/choice').set(choice);
+        var choice = $(this).val();
+        database.ref('/users/player2/choice').set(choice);
 
         if(player1 != true) {
 
-            $("p2-choices").text(choice)
+            $("#p2-choices").text(choice)
 
         }else{
 
@@ -302,6 +302,9 @@ function playRound(snapshot) {
     var p1choice = snapshot.val().player1.choice;
     var p2choice = snapshot.val().player2.choice;
 
+    console.log(p1choice);
+    console.log(p2choice);
+
     switch(p1choice){
 
         case "R":   
@@ -311,16 +314,21 @@ function playRound(snapshot) {
                 case "R":
 
                     tie();
+                    break;
 
                 case "P":
 
                     p2win();
+                    break;
 
                 case "S":
 
                     p1win()
+                    break;
             
             }
+            
+            break;
 
         
         
@@ -331,16 +339,21 @@ function playRound(snapshot) {
                 case "R":
 
                     p1win();
+                    break;
 
                 case "P":
 
                     tie();
+                    break;
 
                 case "S":
 
                     p2win();
+                    break;
 
             }
+
+            break;
 
         
         
@@ -352,17 +365,21 @@ function playRound(snapshot) {
                 case "R":
 
                     p2win();
+                    break;
 
                 case "P":
 
                     p1win();
+                    break;
 
                 case "S":
 
                     tie();
+                    break;
 
             }
         
+            break;
     }
 
 }
@@ -371,12 +388,27 @@ function p1win() {
 
     console.log("p1 wins");
 
+    if(player1 == true){
+
+        wins++;
+
+    }else{
+
+    }
+
 
 }
 
 function p2win() {
 
     console.log("p2 wins");
+    if(player2 == true){
+
+        wins++;
+
+    }else{
+
+    }
 
     
 }
