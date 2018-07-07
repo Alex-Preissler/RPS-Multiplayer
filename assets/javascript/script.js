@@ -16,8 +16,10 @@ var config = {
   var player1Ref = database.ref('/users/player1/name');
   var player2Ref = database.ref('/users/player2/name');
   var queue;
-  var wins = 0;
-  var losses = 0;
+  var p1wins = 0;
+  var p1losses = 0;
+  var p2wins = 0;
+  var p2losses = 0;
   var turn = "p1";
 
   $( document ).ready(function(){ 
@@ -70,7 +72,9 @@ $(document).on("click","#name-submit", function(event) {
             $("#player-assign").append(playerGreeting);
 
             $("#p1-name").text(name);
-            $("#p1-score").text("Wins: " + wins + "  Losses: " + losses);
+            $("#p1-score").text("Wins: " + p1wins + "  Losses: " + p1losses);
+
+            $("#p2-score").text("Wins: " + p2wins + "  Losses: " + p2losses);
      
            
         }else if(snapshot.val().users.player2.name == false) {
@@ -87,8 +91,9 @@ $(document).on("click","#name-submit", function(event) {
             $("#player-assign").append(playerGreeting);
 
             $("#p2-name").text(name);
-            $("#p2-score").text("Wins: " + wins + "  Losses: " + losses);
-   
+            $("#p2-score").text("Wins: " + p2wins + "  Losses: " + p2losses);
+            
+            $("#p1-score").text("Wins: " + p1wins + "  Losses: " + p1losses);
         
         }else{
             
@@ -224,7 +229,7 @@ function gameControl(snapshot) {
 
         }else{
 
-            $("#game-control").text("Waiting for " + snapshot.val().player2.name + " to choose.");
+            $("#game-control").text("Waiting for " + snapshot.val().player1.name + " to choose.");
 
         }
 
@@ -301,6 +306,7 @@ function playRound(snapshot) {
 
     var p1choice = snapshot.val().player1.choice;
     var p2choice = snapshot.val().player2.choice;
+    var snap = snapshot;
 
     console.log(p1choice);
     console.log(p2choice);
@@ -318,12 +324,12 @@ function playRound(snapshot) {
 
                 case "P":
 
-                    p2win();
+                    p2win(snap);
                     break;
 
                 case "S":
 
-                    p1win()
+                    p1win(snap)
                     break;
             
             }
@@ -338,7 +344,7 @@ function playRound(snapshot) {
 
                 case "R":
 
-                    p1win();
+                    p1win(snap);
                     break;
 
                 case "P":
@@ -348,7 +354,7 @@ function playRound(snapshot) {
 
                 case "S":
 
-                    p2win();
+                    p2win(snap);
                     break;
 
             }
@@ -364,12 +370,12 @@ function playRound(snapshot) {
 
                 case "R":
 
-                    p2win();
+                    p2win(snap);
                     break;
 
                 case "P":
 
-                    p1win();
+                    p1win(snap);
                     break;
 
                 case "S":
@@ -384,39 +390,41 @@ function playRound(snapshot) {
 
 }
 
-function p1win() {
+function p1win(snapshot) {
 
     console.log("p1 wins");
+    console.log(snapshot);
 
-    if(player1 == true){
+        p1wins++
+        
+        $("#p1-score").text("Wins: " + p1wins + "  Losses: " + p1losses);
 
-        wins++;
+        $("#p2-score").text("Wins: " + p2wins + "  Losses: " + p2losses);
 
-    }else{
-
-    }
-
+        $("#game-box-text").text(snapshot.val().player1.name + "wins!");
 
 }
 
-function p2win() {
+function p2win(snapshot) {
 
     console.log("p2 wins");
-    if(player2 == true){
-
-        wins++;
-
-    }else{
-
-    }
-
+    console.log(snapshot);
     
+    p2wins++;
+
+    $("#p1-score").text("Wins: " + p1wins + "  Losses: " + p1losses);
+
+    $("#p2-score").text("Wins: " + p2wins + "  Losses: " + p2losses);
+
+    $("#game-box-text").text(snapshot.val().player2.name + "wins!");
+
 }
 
 function tie() {
 
     console.log("tie");
 
+    $("#game-box-text").text("Tie");
     
 }
 
